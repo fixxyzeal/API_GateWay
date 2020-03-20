@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v1
     -   # build image
       run: |
-          uses: ./API_GateWay
+          pushd: ./API_GateWay
           docker info
           docker build -t fsdapigateway -f Dockerfile .
     - name: Build and deploy the Docker image
