@@ -1,20 +1,20 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["API_GateWay/API_GateWay.csproj", "API_GateWay/"]
-RUN dotnet restore "API_GateWay/API_GateWay.csproj"
+COPY *.sln .
+COPY API_GateWay/*.csproj API_GateWay/
+RUN dotnet restore
 COPY . .
-WORKDIR "/src/API_GateWay"
-RUN dotnet build "API_GateWay.csproj" -c Release -o /app/build
 
+# testing
+
+# publish
 FROM build AS publish
-RUN dotnet publish "API_GateWay.csproj" -c Release -o /app/publish
+WORKDIR /src/API_GateWay
+RUN dotnet publish -c Release -o /src/publish
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "API_GateWay.dll"]
+COPY --from=publish /src/publish .
+
+# heroku uses the following
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet API_GateWay.dll
