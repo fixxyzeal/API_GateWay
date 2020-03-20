@@ -7,7 +7,7 @@ WORKDIR /app/aspnetapp
 RUN dotnet restore
 
 # Copy everything else and build
-COPY . ./
+COPY . ./API_GateWay/
 RUN dotnet publish "API_GateWay" -c Release -o /app
 
 # Build runtime image
