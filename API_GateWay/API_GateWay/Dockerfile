@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY *.sln .
 COPY API_GateWay/*.csproj API_GateWay/
 RUN dotnet restore
 COPY . .
