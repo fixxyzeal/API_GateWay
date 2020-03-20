@@ -1,19 +1,17 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-WORKDIR /src
-COPY API_GateWay/*.csproj API_GateWay/
-RUN dotnet restore
-COPY . .
-
-# testing
-
-# publish
-FROM build AS publish
-WORKDIR /src/API_GateWay
-RUN dotnet publish -c Release -o /src/publish
-
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS runtime
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1  AS build-env
 WORKDIR /app
-COPY --from=publish /src/publish .
 
-# heroku uses the following
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet API_GateWay.dll
+# Copy csproj and restore as distinct layers
+COPY . ./aspnetapp/
+WORKDIR /app/aspnetapp
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish "API_GateWay" -c Release -o /app
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 as final
+WORKDIR /app
+COPY --from=build-env /app .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet API_GateWay.dll --environment "Production"
