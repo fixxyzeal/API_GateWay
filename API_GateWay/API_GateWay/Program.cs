@@ -7,6 +7,9 @@ using Ocelot.Middleware;
 using Ocelot.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Ocelot.Cache.CacheManager;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace API_GateWay
 {
@@ -28,6 +31,9 @@ namespace API_GateWay
               })
               .ConfigureServices(s =>
               {
+                  s.AddHealthChecks();
+
+                  s.AddHealthChecksUI();
                   s.AddOcelot().AddCacheManager(x =>
                   {
                       x.WithDictionaryHandle();
@@ -40,6 +46,14 @@ namespace API_GateWay
               .UseIISIntegration()
               .Configure(app =>
               {
+                  app.UseHealthChecks("/hc", new HealthCheckOptions()
+                  {
+                      Predicate = _ => true,
+                      ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                  });
+
+                  app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+
                   app.UseOcelot().Wait();
               })
 

@@ -19,6 +19,7 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://fsdapigateway.herokuapp.com"
+    "BaseUrl": "https://fsdapigateway.herokuapp.com",
+    //"BaseUrl": "https://localhost:5001"
   }
 }
