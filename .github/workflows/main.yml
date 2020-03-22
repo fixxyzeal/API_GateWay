@@ -29,9 +29,8 @@ jobs:
         APP_NAME: ${{ 'fsdapigateway' }}
     
       run: |
-        cd ./API_GateWay
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-        docker tag awesomeapi registry.heroku.com/$APP_NAME/web
+        docker tag fsdapigateway registry.heroku.com/$APP_NAME/web
         docker push registry.heroku.com/$APP_NAME/web                
         curl https://cli-assets.heroku.com/install.sh | sh
         heroku container:release web -a $APP_NAME
