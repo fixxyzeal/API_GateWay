@@ -25,7 +25,7 @@
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/api/external/{everything}",
+      "UpstreamPathTemplate": "/external/api/{everything}",
       "UpstreamHttpMethod": [],
       "FileCacheOptions": {
         "TtlSeconds": 3600,
