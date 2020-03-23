@@ -15,8 +15,23 @@
         "TtlSeconds": 3600,
         "Region": "dbgatewaycaching"
       }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "fsdexternalserviceapi.herokuapp.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/api/external/{everything}",
+      "UpstreamHttpMethod": [],
+      "FileCacheOptions": {
+        "TtlSeconds": 3600,
+        "Region": "externalservicecaching"
+      }
     }
-
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://fsdapigateway.herokuapp.com",
