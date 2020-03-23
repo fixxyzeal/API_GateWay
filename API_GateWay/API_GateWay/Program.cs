@@ -43,7 +43,6 @@ namespace API_GateWay
               {
                   logging.AddConsole();
               })
-              .UseIISIntegration()
               .Configure(app =>
               {
                   app.UseHealthChecks("/hc", new HealthCheckOptions()
