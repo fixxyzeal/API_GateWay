@@ -12,7 +12,7 @@
       "UpstreamPathTemplate": "/api/{everything}",
       "UpstreamHttpMethod": [],
       "FileCacheOptions": {
-        "TtlSeconds": 20,
+        "TtlSeconds": 10,
         "Region": "dbgatewaycaching"
       }
     },
@@ -28,7 +28,7 @@
       "UpstreamPathTemplate": "/external/api/{everything}",
       "UpstreamHttpMethod": [],
       "FileCacheOptions": {
-        "TtlSeconds": 20,
+        "TtlSeconds": 10,
         "Region": "externalservicecaching"
       }
     }
