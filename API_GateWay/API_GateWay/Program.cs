@@ -33,7 +33,10 @@ namespace API_GateWay
               {
                   s.AddHealthChecks();
 
-                  s.AddHealthChecksUI();
+                  // stop using healthcheck ui
+
+                  //s.AddHealthChecksUI();
+
                   s.AddOcelot().AddCacheManager(x =>
                   {
                       x.WithDictionaryHandle();
@@ -51,7 +54,7 @@ namespace API_GateWay
                       ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                   });
 
-                  app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+                  //app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
 
                   app.UseOcelot().Wait();
               })
