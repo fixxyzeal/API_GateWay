@@ -27,10 +27,6 @@
       ],
       "UpstreamPathTemplate": "/external/api/{everything}",
       "UpstreamHttpMethod": [],
-      "FileCacheOptions": {
-        "TtlSeconds": 10,
-        "Region": "externalservicecaching"
-      }
     },
 
     {
