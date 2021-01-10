@@ -48,6 +48,18 @@
         "TtlSeconds": 10,
         "Region": "apicaching"
       }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "f-commerceapi.herokuapp.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/fcommerce/{everything}",
+      "UpstreamHttpMethod": []
     }
   ],
   "GlobalConfiguration": {
