@@ -54,7 +54,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "magicblogapi.herokuapp.com/",
+          "Host": "magicblogapi.herokuapp.com",
           "Port": 443
         }
       ],
