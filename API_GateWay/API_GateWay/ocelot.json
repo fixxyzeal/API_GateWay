@@ -54,11 +54,11 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "f-commerceapi.herokuapp.com",
+          "Host": "magicblogapi.herokuapp.com/",
           "Port": 443
         }
       ],
-      "UpstreamPathTemplate": "/fcommerce/{everything}",
+      "UpstreamPathTemplate": "/magicblog/{everything}",
       "UpstreamHttpMethod": []
     }
   ],
